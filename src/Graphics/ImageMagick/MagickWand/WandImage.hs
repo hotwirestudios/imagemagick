@@ -331,7 +331,7 @@ module Graphics.ImageMagick.MagickWand.WandImage
   ) where
 
 import           Control.Applicative                            ((<$>))
-import           Control.Monad (void)
+import           Control.Monad                                  (void)
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Resource
 import           Data.ByteString                                (ByteString,
@@ -345,7 +345,7 @@ import           Data.Text.Encoding                             (decodeUtf8,
                                                                  encodeUtf8)
 import           Data.Vector.Storable                           (Vector)
 import qualified Data.Vector.Storable                           as V
-import           Foreign hiding (void)
+import           Foreign                                        hiding (void)
 import           Foreign.C.Types
 import           Graphics.ImageMagick.MagickCore.Types
 import qualified Graphics.ImageMagick.MagickWand.FFI.MagickWand as F
@@ -945,7 +945,8 @@ setImageType w imageType = withException_ w $ F.magickSetImageType w imageType
 
 
 -- | Convert system specific filepath to bytestring
-_toBS = 
+_toBS :: Text -> ByteString
+_toBS =
 #if defined(CABAL_OS_WINDOWS) || defined(CABAL_OS_DARWIN)
     encodeUtf8
 #else

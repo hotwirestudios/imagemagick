@@ -103,6 +103,7 @@ import           Control.Applicative                                ((<$>))
 import           Control.Exception
 import           Control.Monad
 import           Control.Monad.IO.Class
+import           Control.Monad.Trans.Control                        (MonadBaseControl)
 import           Control.Monad.Trans.Resource
 import           Data.ByteString
 import           Data.Text                                          (Text)
@@ -131,7 +132,7 @@ withMagickWandGenesis f = bracket start finish (\_ -> runResourceT f)
     finish = liftIO . const F.magickWandTerminus
 
 -- | Open a nested block inside genesis (for tracking nested resources)
-localGenesis :: MonadBaseControl IO m => ResourceT m a -> m a
+localGenesis :: (MonadBaseControl IO m, MonadUnliftIO m) => ResourceT m a -> m a
 localGenesis f = runResourceT f
 
 magickWand :: (MonadResource m) => m (ReleaseKey, Ptr MagickWand)
