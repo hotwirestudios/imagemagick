@@ -79,8 +79,8 @@ Library
                       , Graphics.ImageMagick.MagickWand.FFI.WandImage
                       , Graphics.ImageMagick.MagickWand.FFI.WandProperties
   build-depends:       base >= 4.0 && <5.0
-                      , resourcet >= 0.3 && <1.3
-                      , transformers >= 0.3 && < 0.6
+                      , resourcet >= 0.3 && <1.4
+                      , transformers >= 0.3 && < 0.7
                       , vector >= 0.9 && < 0.14
                       , bytestring >= 0.9 && <0.12
                       , text >= 0.11 && <2.1
